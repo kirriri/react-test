@@ -1,16 +1,35 @@
 import React from 'react'
 import store from './store'
-import { CHANGE_INPUT_VALUE } from './store/actionTypes'
-import { getInputChangeAction } from './store/actionCreators'
+import { getInitList, getInputChangeAction } from './store/actionCreators'
 
 class Test extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = store.getState()
+        console.log('constructor')
         store.subscribe(this.handleStoreChange)
     }
+
+    componentDidMount() {
+        const action = getInitList()
+        store.dispatch(action)
+        let srcObj = {
+            name: 'lilei',
+            age: '20'
+          };
+           
+          let copyObj2 = Object.assign({}, srcObj, {
+            age: '21'
+          });
+           
+          copyObj2.age = '23';
+           
+          console.log('srcObj', srcObj); //{ name: 'lilei', age: '22' }
+    }
+
     handleStoreChange = () => {
+        console.log(store.getState())
         this.setState(store.getState())
     }
 
@@ -20,7 +39,6 @@ class Test extends React.Component {
 
     handleChange = (e) => {
         const action = getInputChangeAction(e.target.value)
-        console.log(action)
         store.dispatch(action)
     }
     
