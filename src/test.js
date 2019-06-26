@@ -1,6 +1,6 @@
 import React from 'react'
 import store from './store'
-import { getInitList, getInputChangeAction } from './store/actionCreators'
+import { getInitListAction, getInputChangeAction } from './store/actionCreators'
 
 class Test extends React.Component {
 
@@ -12,25 +12,13 @@ class Test extends React.Component {
     }
 
     componentDidMount() {
-        const action = getInitList()
+        const action = getInitListAction()
         store.dispatch(action)
-        let srcObj = {
-            name: 'lilei',
-            age: '20'
-          };
-           
-          let copyObj2 = Object.assign({}, srcObj, {
-            age: '21'
-          });
-           
-          copyObj2.age = '23';
-           
-          console.log('srcObj', srcObj); //{ name: 'lilei', age: '22' }
     }
 
     handleStoreChange = () => {
-        console.log(store.getState())
         this.setState(store.getState())
+        console.log(this.state)
     }
 
     handleClick = () => {
