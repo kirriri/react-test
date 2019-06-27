@@ -16,7 +16,10 @@ class Test extends React.Component {
         store.dispatch(action)
         let srcObj = {
             name: 'lilei',
-            age: '20'
+            age: '20',
+            a: {
+                aab: '1111'
+            }
           };
            
           let copyObj2 = Object.assign({}, srcObj, {
