@@ -1,4 +1,4 @@
-import { CHANGE_INPUT_VALUE } from './actionTypes'
+import { CHANGE_INPUT_VALUE, INIT_LIST_ACTION } from './actionTypes'
 
 const defaultState = {
     value: 'test',
@@ -8,9 +8,13 @@ const defaultState = {
 export default (state = defaultState, action) => {
     switch(action.type) {
         case CHANGE_INPUT_VALUE:
-            const newState = JSON.parse(JSON.stringify(state))
-            newState.value = action.value
-            return newState
+            const changeValueState = JSON.parse(JSON.stringify(state))
+            changeValueState.value = action.value
+            return changeValueState
+        case INIT_LIST_ACTION:
+            const initListValueState = JSON.parse(JSON.stringify(state))
+            initListValueState.list = action.value.data.projects
+            return initListValueState
         default: 
             return state
       }
