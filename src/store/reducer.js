@@ -1,16 +1,13 @@
-import { CHANGE_INPUT_VALUE, INIT_LIST_ACTION } from './actionTypes'
+import { INIT_LIST_ACTION } from './actionTypes'
+import { combineReducers } from 'redux'
+import testReducer from '../common/Test/store/reducer'
 
 const defaultState = {
-    value: 'test',
     bbb: [1,1,1]
 }
 
-export default (state = defaultState, action) => {
+const mainReducer =  (state = defaultState, action) => {
     switch(action.type) {
-        case CHANGE_INPUT_VALUE:
-            const changeValueState = JSON.parse(JSON.stringify(state))
-            changeValueState.value = action.value
-            return changeValueState
         case INIT_LIST_ACTION:
             const initListValueState = JSON.parse(JSON.stringify(state))
             initListValueState.list = action.value.data.projects
@@ -20,3 +17,8 @@ export default (state = defaultState, action) => {
       }
     
 }
+
+export default combineReducers({
+    test: testReducer,
+    test2: mainReducer
+})
